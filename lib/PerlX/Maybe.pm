@@ -6,7 +6,7 @@ use strict;
 our (@EXPORT, @ISA);
 BEGIN {
 	$PerlX::Maybe::AUTHORITY = 'cpan:TOBYINK';
-	$PerlX::Maybe::VERSION   = '0.001';
+	$PerlX::Maybe::VERSION   = '0.002';
 	
 	require Exporter;
 	@ISA       = qw/Exporter/;
@@ -15,12 +15,14 @@ BEGIN {
 
 sub maybe ($$@)
 {
-	my ($x, $y, @rest) = @_;
-	my @r = (
-		(defined $y && defined $x ? ($x, $y) : ()),
-		@rest,
-		);
-	return @r;
+	if (defined $_[0] and defined $_[1])
+	{
+		@_
+	}
+	else
+	{
+		(scalar @_ > 1) ? @_[2 .. $#_] : qw()
+	}
 }
 
 __FILE__
@@ -71,6 +73,13 @@ at all when they are undefined, ugly looking code like this is often used:
  my $bob = Person->new(
     defined $name ? (name => $name) : (),
     defined $age ? (age => $age) : (),
+    );
+
+or:
+
+ my $bob = Person->new(
+    (name => $name) x!!(defined $name),
+    (age  => $age)  x!!(defined $age),
     );
 
 A slightly more elegant solution is the C<maybe> function:

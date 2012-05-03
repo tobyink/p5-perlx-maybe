@@ -15,3 +15,14 @@ dist:v_0-001
 	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-0.001.tar.gz> ;
 	rdfs:label      "Initial release" .
 
+dist:project :release dist:v_0-002 .
+dist:v_0-002
+	a               :Version ;
+	dc:issued       "2012-05-03"^^xsd:date ;
+	:revision       "0.002"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-0.002.tar.gz> ;
+	dcs:changeset [
+		dcs:versus dist:v_0-001 ;
+		dcs:item   [ rdfs:label "Faster implementation. Tested on Perl 5.10.1 on Linux, the new version is 60% faster. (Not that it was slow to begin with - 'maybe' is a pretty simple function.)"@en ] ;
+		] .
+
