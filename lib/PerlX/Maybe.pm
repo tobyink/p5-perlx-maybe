@@ -137,8 +137,6 @@ to "just work".
 
 This function is exported by default.
 
-=over
-
 =item C<< provided $condition, $x => $y, @rest >>
 
 Like C<maybe> but allows you to use a custom condition expression:
@@ -168,7 +166,7 @@ seem to show this to be around 30% faster.
 =head2 Environment
 
 The environment variable C<PERLX_MAYBE_IMPLEMENTATION> may be set to
-"PP" to prevent the XS backend from loading.
+C<< "PP" >> to prevent the XS backend from loading.
 
 =head1 BUGS
 
