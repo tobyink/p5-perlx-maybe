@@ -6,6 +6,7 @@
 @prefix dist:    <http://purl.org/NET/cpan-uri/dist/PerlX-Maybe/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/>.
 
 dist:project :release dist:v_0-001 .
 dist:v_0-001
@@ -24,5 +25,22 @@ dist:v_0-002
 	dcs:changeset [
 		dcs:versus dist:v_0-001 ;
 		dcs:item   [ rdfs:label "Faster implementation. Tested on Perl 5.10.1 on Linux, the new version is 60% faster. (Not that it was slow to begin with - 'maybe' is a pretty simple function.)"@en ] ;
-		] .
+	] .
 
+dist:project :release dist:v_0-003 .
+dist:v_0-003
+	a               :Version ;
+	dc:issued       "2013-03-12"^^xsd:date ;
+	:revision       "0.003"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-0.003.tar.gz> ;
+	dcs:changeset [
+		dcs:versus dist:v_0-002 ;
+		dcs:item [
+			rdfs:label "Use PerlX::Maybe::XS if it's available - roughly 30% faster."@en;
+		];
+		dcs:item [
+			rdfs:label "Optionally export 'provided' function."@en;
+			rdfs:seeAlso <https://rt.cpan.org/Ticket/Display.html?id=83883>;
+			dcs:thanks [ foaf:nick "DMCBRIDE" ];
+		];
+	] .
