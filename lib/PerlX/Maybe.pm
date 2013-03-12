@@ -3,19 +3,32 @@ package PerlX::Maybe;
 use 5.008;
 use strict;
 
-our (@EXPORT, @ISA);
 BEGIN {
 	$PerlX::Maybe::AUTHORITY = 'cpan:TOBYINK';
 	$PerlX::Maybe::VERSION   = '0.002';
 	
 	require Exporter;
-	@ISA       = qw/Exporter/;
-	@EXPORT    = qw/maybe/;
+	our @ISA         = qw/Exporter/;
+	our @EXPORT      = qw/ maybe /;
+	our @EXPORT_OK   = qw/ maybe provided /;
+	our %EXPORT_TAGS = (all => \@EXPORT_OK, default => \@EXPORT);
 }
 
 sub maybe ($$@)
 {
 	if (defined $_[0] and defined $_[1])
+	{
+		@_
+	}
+	else
+	{
+		(scalar @_ > 1) ? @_[2 .. $#_] : qw()
+	}
+}
+
+sub provided ($$$@)
+{
+	if (shift)
 	{
 		@_
 	}
@@ -39,14 +52,14 @@ You once wrote:
  my $bob = Person->new(
     defined $name ? (name => $name) : (),
     defined $age ? (age => $age) : (),
-    );
+ );
 
 Now you can write:
 
  my $bob = Person->new(
     maybe name => $name,
     maybe age  => $age,
-    );
+ );
 
 =head1 DESCRIPTION
 
@@ -57,7 +70,7 @@ arguments like this:
  my $bob = Person->new(
     name => $name,
     age => $age,
-    );
+ );
 
 Will result in the C<name> and C<age> attributes possibly being set to
 undef (if the corresponding C<$name> and C<$age> variables are not defined),
@@ -73,18 +86,22 @@ at all when they are undefined, ugly looking code like this is often used:
  my $bob = Person->new(
     defined $name ? (name => $name) : (),
     defined $age ? (age => $age) : (),
-    );
+ );
 
 or:
 
  my $bob = Person->new(
     (name => $name) x!!(defined $name),
     (age  => $age)  x!!(defined $age),
-    );
+ );
 
-A slightly more elegant solution is the C<maybe> function:
+A slightly more elegant solution is the C<maybe> function.
 
-=head2 C<< maybe $x => $y, @rest >>
+=head2 Functions
+
+=over
+
+=item C<< maybe $x => $y, @rest >>
 
 This function checks that C<< $x >> and C<< $y >> are both defined. If they
 are, it returns them both as a list; otherwise it returns the empty list.
@@ -101,9 +118,27 @@ to "just work".
    maybe phone     => $tel,
    maybe email     => $email,
          unique_id => $id,
-   );
+ );
 
 This function is exported by default.
+
+=back
+
+=over
+
+=item C<< provided $condition, $x => $y, @rest >>
+
+Like C<maybe> but allows you to use a custom condition expression:
+
+ my $bob = Person->new(
+                             name      => $name,
+                             address   => $addr,
+   provided length($tel),    phone     => $tel,
+   provided $email =~ /\@/,  email     => $email,
+                             unique_id => $id,
+ );
+
+=back
 
 =head1 BUGS
 
