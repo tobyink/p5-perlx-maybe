@@ -14,7 +14,7 @@ BEGIN {
 	our %EXPORT_TAGS = (all => \@EXPORT_OK, default => \@EXPORT);
 }
 
-unless ($ENV{PERLX_MAYBE_IMPLEMENTATION} =~ /pp/i)
+unless (($ENV{PERLX_MAYBE_IMPLEMENTATION}||'') =~ /pp/i)
 {
 	eval q{ use PerlX::Maybe::XS 0.003 ':all' };
 }
