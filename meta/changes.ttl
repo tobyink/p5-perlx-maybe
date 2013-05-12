@@ -44,3 +44,16 @@ dist:v_0-003
 			dcs:thanks [ foaf:nick "DMCBRIDE" ];
 		];
 	] .
+
+dist:project :release dist:v_0-004 .
+dist:v_0-004
+	a               :Version ;
+	dc:issued       "2013-05-12"^^xsd:date ;
+	:revision       "0.004"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-0.004.tar.gz> ;
+	dcs:changeset [
+		dcs:versus dist:v_0-003 ;
+		dcs:item [
+			rdfs:label "Silence warnings under 'perl -w'. (But you shouldn't use 'perl -w' anyway.)"@en;
+		];
+	] .
