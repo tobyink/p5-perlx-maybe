@@ -1,6 +1,6 @@
 package Syntax::Feature::Maybe;
 
-use 5.008;
+use 5.006;
 use strict;
 use PerlX::Maybe qw//;
 
@@ -10,9 +10,9 @@ BEGIN {
 }
 
 sub install
-{	
+{
 	my ($class, %args) = @_;
-	my $into = delete $args{into};
+	my $into = delete($args{into});
 	
 	foreach my $f (qw/maybe/)
 	{
@@ -23,6 +23,10 @@ sub install
 
 __FILE__
 __END__
+
+=pod
+
+=encoding utf8
 
 =head1 NAME
 

@@ -56,6 +56,12 @@ END_PP
 __FILE__
 __END__
 
+=pod
+
+=encoding utf8
+
+=for stopwords benchmarking
+
 =head1 NAME
 
 PerlX::Maybe - return a pair only if they are both defined
