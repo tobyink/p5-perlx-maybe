@@ -1,13 +1,8 @@
 # This file provides instructions for packaging.
 
-@prefix : <http://purl.org/NET/cpan-uri/terms#> .
+@prefix : <http://ontologi.es/doap-deps#> .
 
 <http://purl.org/NET/cpan-uri/dist/PerlX-Maybe/project>
-	:perl_version_from _:main ;
-	:version_from _:main ;
-	:readme_from _:main ;
-	:test_requires "Test::More 0.61" ;
-	:requires "strict","Exporter".
-
-_:main <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/PerlX/Maybe.pm" .
+	:test-requirement    [ :on "Test::More 0.61"^^:CpanId ];
+	:runtime-requirement [ :on "perl 5.006"^^:CpanId ].
 
