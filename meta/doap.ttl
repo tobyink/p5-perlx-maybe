@@ -10,7 +10,7 @@
 	a               :Project ;
 	:programming-language "Perl" ;
 	:name           "PerlX-Maybe" ;
-	:shortdesc      "return a given list only if they are all defined" ;
+	:shortdesc      "return a pair only if they are both defined" ;
 	:homepage       <https://metacpan.org/release/PerlX-Maybe> ;
 	:download-page  <https://metacpan.org/release/PerlX-Maybe> ;
 	:repository     [ a :GitRepository ; :browse <https://github.com/tobyink/p5-perlx-maybe> ] ;
