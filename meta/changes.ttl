@@ -71,3 +71,17 @@ dist:v_0-999_01
 			rdfs:label "Switch to Dist::Inkt."@en;
 		];
 	] .
+
+dist:project :release dist:v_0-999_02 .
+dist:v_0-999_02
+	a               :Version ;
+	dc:issued       "2013-08-10"^^xsd:date ;
+	:revision       "0.999_02"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-0.999_02.tar.gz> ;
+	dcs:changeset [
+		dcs:versus dist:v_0-999_01 ;
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Add myself as maintainer rather than developer; this should ensure that I don't get listed in 'x_contributors'."@en;
+		];
+	] .
