@@ -17,7 +17,13 @@
 	:bug-database   <http://rt.cpan.org/Dist/Display.html?Queue=PerlX-Maybe> ;
 	:created        "2012-02-15"^^xsd:date ;
 	:license        <http://dev.perl.org/licenses/> ;
-	:developer      [ a foaf:Person ; foaf:name "Toby Inkster" ; foaf:mbox <mailto:tobyink@cpan.org> ] .
+	:developer      <http://purl.org/NET/cpan-uri/person/tobyink>;
+	:maintainer     <http://purl.org/NET/cpan-uri/person/tobyink>.
+
+<http://purl.org/NET/cpan-uri/person/tobyink>
+	a foaf:Person;
+	foaf:name "Toby Inkster";
+	foaf:mbox <mailto:tobyink@cpan.org>.
 
 <http://dev.perl.org/licenses/>
 	dc:title        "the same terms as the perl 5 programming language system itself" .
