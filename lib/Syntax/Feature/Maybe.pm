@@ -6,7 +6,7 @@ use PerlX::Maybe qw//;
 
 BEGIN {
 	$Syntax::Feature::Maybe::AUTHORITY = 'cpan:TOBYINK';
-	$Syntax::Feature::Maybe::VERSION   = '0.004';
+	$Syntax::Feature::Maybe::VERSION   = '0.999_01';
 }
 
 sub install

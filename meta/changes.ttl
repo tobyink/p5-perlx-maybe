@@ -41,7 +41,7 @@ dist:v_0-003
 		dcs:item [
 			rdfs:label "Optionally export 'provided' function."@en;
 			rdfs:seeAlso <https://rt.cpan.org/Ticket/Display.html?id=83883>;
-			dcs:thanks [ foaf:nick "DMCBRIDE" ];
+			dcs:thanks [ foaf:name "Darin McBride"; foaf:nick "DMCBRIDE" ];
 		];
 	] .
 
@@ -55,5 +55,19 @@ dist:v_0-004
 		dcs:versus dist:v_0-003 ;
 		dcs:item [
 			rdfs:label "Silence warnings under 'perl -w'. (But you shouldn't use 'perl -w' anyway.)"@en;
+		];
+	] .
+
+dist:project :release dist:v_0-999_01 .
+dist:v_0-999_01
+	a               :Version ;
+	dc:issued       "2013-08-10"^^xsd:date ;
+	:revision       "0.999_01"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-0.999_01.tar.gz> ;
+	dcs:changeset [
+		dcs:versus dist:v_0-004 ;
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Switch to Dist::Inkt."@en;
 		];
 	] .
