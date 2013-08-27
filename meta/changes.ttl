@@ -85,3 +85,11 @@ dist:v_0-999_02
 			rdfs:label "Add myself as maintainer rather than developer; this should ensure that I don't get listed in 'x_contributors'."@en;
 		];
 	] .
+
+dist:project :release dist:v_1-000 .
+dist:v_1-000
+	a               :Version ;
+	dc:issued       "2013-08-27"^^xsd:date ;
+	:revision       "1.000"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-1.000.tar.gz> ;
+	rdfs:comment    "No functional changes.".

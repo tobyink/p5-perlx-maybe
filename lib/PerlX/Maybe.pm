@@ -5,7 +5,7 @@ use strict;
 
 BEGIN {
 	$PerlX::Maybe::AUTHORITY = 'cpan:TOBYINK';
-	$PerlX::Maybe::VERSION   = '0.999_02';
+	$PerlX::Maybe::VERSION   = '1.0';
 	
 	require Exporter;
 	our @ISA         = qw/ Exporter /;
