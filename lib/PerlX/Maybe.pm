@@ -1,11 +1,12 @@
-package PerlX::Maybe;
-
 use 5.006;
 use strict;
+use warnings;
+
+package PerlX::Maybe;
 
 BEGIN {
-	$PerlX::Maybe::AUTHORITY = 'cpan:TOBYINK';
-	$PerlX::Maybe::VERSION   = '1.000';
+	our $AUTHORITY = 'cpan:TOBYINK';
+	our $VERSION   = '1.000';
 	
 	require Exporter;
 	our @ISA         = qw/ Exporter /;

@@ -1,12 +1,14 @@
-package Syntax::Feature::Maybe;
-
 use 5.006;
 use strict;
+use warnings;
+
 use PerlX::Maybe qw//;
 
+package Syntax::Feature::Maybe;
+
 BEGIN {
-	$Syntax::Feature::Maybe::AUTHORITY = 'cpan:TOBYINK';
-	$Syntax::Feature::Maybe::VERSION   = '1.000';
+	our $AUTHORITY = 'cpan:TOBYINK';
+	our $VERSION   = '1.000';
 }
 
 sub install
