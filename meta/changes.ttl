@@ -93,3 +93,20 @@ dist:v_1-000
 	:revision       "1.000"^^xsd:string ;
 	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-1.000.tar.gz> ;
 	rdfs:comment    "No functional changes.".
+
+dist:project :release dist:v_1-001 .
+dist:v_1-001
+	a               :Version ;
+	dc:issued       "2014-09-23"^^xsd:date ;
+	:revision       "1.001"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-1.001.tar.gz> ;
+	dcs:changeset [
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Package using newer version of Dist::Inkt."@en;
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "use warnings."@en;
+		];
+	].

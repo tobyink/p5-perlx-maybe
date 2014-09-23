@@ -8,7 +8,7 @@ package Syntax::Feature::Maybe;
 
 BEGIN {
 	our $AUTHORITY = 'cpan:TOBYINK';
-	our $VERSION   = '1.000';
+	our $VERSION   = '1.001';
 }
 
 sub install

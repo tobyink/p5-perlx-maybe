@@ -6,7 +6,7 @@ package PerlX::Maybe;
 
 BEGIN {
 	our $AUTHORITY = 'cpan:TOBYINK';
-	our $VERSION   = '1.000';
+	our $VERSION   = '1.001';
 	
 	require Exporter;
 	our @ISA         = qw/ Exporter /;
