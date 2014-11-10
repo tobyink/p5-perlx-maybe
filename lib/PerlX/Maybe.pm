@@ -78,6 +78,8 @@ You once wrote:
 
 Now you can write:
 
+ use PerlX::Maybe;
+
  my $bob = Person->new(
     maybe name => $name,
     maybe age  => $age,
@@ -111,6 +113,8 @@ at all when they are undefined, ugly looking code like this is often used:
  );
 
 or:
+
+ use PerlX::Maybe;
 
  my $bob = Person->new(
     (name => $name) x!!(defined $name),
