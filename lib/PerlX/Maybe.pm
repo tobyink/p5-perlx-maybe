@@ -26,6 +26,11 @@ sub IMPLEMENTATION () { "XS" }
 
 END_XS
 
+BEGIN {
+	require Ref::Util;
+	Ref::Util->import('is_coderef');
+}
+
 sub IMPLEMENTATION () { "PP" }
 
 sub maybe ($$@)
@@ -44,7 +49,14 @@ sub provided ($$$@)
 {
 	if (shift)
 	{
-		@_
+		if (is_coderef $_[1])
+		{
+			($_[0], $_[1]->(), @_[2..$#_]);
+		}
+		else
+		{
+			@_;
+		}
 	}
 	else
 	{
@@ -155,6 +167,8 @@ Like C<maybe> but allows you to use a custom condition expression:
    provided $email =~ /\@/,  email     => $email,
                              unique_id => $id,
  );
+
+When C<$y> is a coderef, it is evaluated only if C<$condition> is true.
 
 This function is not exported by default.
 
