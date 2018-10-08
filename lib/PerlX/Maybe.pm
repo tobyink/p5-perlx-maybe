@@ -11,7 +11,7 @@ BEGIN {
 	require Exporter;
 	our @ISA         = qw/ Exporter /;
 	our @EXPORT      = qw/ maybe /;
-	our @EXPORT_OK   = qw/ maybe provided provided_deref provided_maybe/;
+	our @EXPORT_OK   = qw/ maybe provided provided_deref provided_deref_with_maybe/;
 	our %EXPORT_TAGS = (all => \@EXPORT_OK, default => \@EXPORT);
 }
 
@@ -57,7 +57,7 @@ sub provided_deref ($$@)
 	return _provided_magic(0, @_)
 }
 
-sub provided_maybe ($$@)
+sub provided_deref_with_maybe ($$@)
 {
 	return _provided_magic(1, @_)
 }
@@ -223,7 +223,7 @@ Like C<provided> but dereferences the 2nd argument into list-context:
 The second argument may also be a CODEREF. in such case, it will use the return
 value of that paticular reference.
 
-=item C<< provided_maybe $condition, $r, @rest >>
+=item C<< provided_deref_with_maybe $condition, $r, @rest >>
 
 Like C<provide_deref> but when the 2nd argument is a HASH ref, it will wrap the
 key/value pairs inside a C<maybe>, and as such will not put C<< $k => undef >>
@@ -234,7 +234,7 @@ onto the list.
                              address     => $addr,
    provided length($tel),    phone       => $tel,
    provided $email =~ /\@/,  email       => $email,
-   provided_maybe $employee, $employee,
+   provided_deref_with_maybe $employee, $employee,
                              unique_id   => $id,
  );
 

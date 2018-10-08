@@ -61,7 +61,7 @@ is_deeply(
 		"_baz", "qux",  6,
 		"fuz", undef,   7,
 	],
-	"does do DWIM dereferencing"
+	"does do dereferencing"
 );
 
 package PerlX::Maybe::Test::Hash;
