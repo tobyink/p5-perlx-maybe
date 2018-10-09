@@ -11,7 +11,7 @@ BEGIN {
 	require Exporter;
 	our @ISA         = qw/ Exporter /;
 	our @EXPORT      = qw/ maybe /;
-	our @EXPORT_OK   = qw/ maybe provided /;
+	our @EXPORT_OK   = qw/ maybe provided provided_deref provided_deref_with_maybe/;
 	our %EXPORT_TAGS = (all => \@EXPORT_OK, default => \@EXPORT);
 }
 
@@ -51,6 +51,52 @@ sub provided ($$$@)
 		(scalar @_ > 1) ? @_[2 .. $#_] : qw()
 	}
 }
+
+sub provided_deref ($$@)
+{
+	return _provided_magic(0, @_)
+}
+
+sub provided_deref_with_maybe ($$@)
+{
+	return _provided_magic(1, @_)
+}
+
+sub _provided_magic ($$$@)
+{
+	my $m = shift; # maybe, clean up private keys
+	if (shift)
+	{
+		my $r = shift;
+		my $t = ref $r;
+		die "Not a reference, $r" unless $t;
+
+		if ( $t eq 'ARRAY'   ) { return ( @$r, @_ ) };
+		if ( $t eq 'SCALAR'  ) { return ( $$r, @_ ) };
+		if ( $t eq 'CODE'    ) { return ( &$r, @_ ) };
+
+		die "Can not dereference, $r ... yet"
+			if grep { $t eq $_ } qw (REF GLOB LVALUE FORMAT IO VSTRING Regexp);
+
+		my @k = eval { keys %$r };
+		die "Can not unwrap $r into a hash" if $@;
+
+		return ( %$r, @_ ) unless $m; 
+		return (
+			( map { maybe $_ => $r->{ $_ } } grep { /^(?!_).*/ } @k ),
+			@_
+		)
+	}
+	else
+	{
+		(scalar @_ > 0) ? @_[1 .. $#_] : qw()
+	}
+}
+
+
+
+
+
 
 END_PP
 
@@ -157,6 +203,46 @@ Like C<maybe> but allows you to use a custom condition expression:
  );
 
 This function is not exported by default.
+
+=item C<< provided_deref $condition, $r, @rest >>
+
+Like C<provided> but dereferences the 2nd argument into list-context:
+
+ my $bob = Person->new(
+                             name        => $name,
+                             address     => $addr,
+   provided length($tel),    phone       => $tel,
+   provided $email =~ /\@/,  email       => $email,
+   provided_deref $employee, {
+                             employee_id => $employee->employee_id,
+                       maybe department  => $employee->department,
+                           },
+                             unique_id   => $id,
+ );
+
+The second argument may also be a CODEREF. in such case, it will use the return
+value of that paticular reference.
+
+=item C<< provided_deref_with_maybe $condition, $r, @rest >>
+
+Like C<provide_deref> but when the 2nd argument is a HASH ref, it will wrap the
+key/value pairs inside a C<maybe>, and as such will not put C<< $k => undef >>
+onto the list.
+
+ my $bob = Person->new(
+                             name        => $name,
+                             address     => $addr,
+   provided length($tel),    phone       => $tel,
+   provided $email =~ /\@/,  email       => $email,
+   provided_deref_with_maybe $employee, $employee,
+                             unique_id   => $id,
+ );
+
+But also, if the 2nd argument is an object - more specifically, a blessed
+HASHref - it will also skip any 'private' attributes (keys starting witn an C<_>
+(underscore).
+
+It not only "just works", it "DWIM"s!
 
 =item C<< PerlX::Maybe::IMPLEMENTATION >>
 
