@@ -15,6 +15,12 @@ BEGIN {
 	our %EXPORT_TAGS = (all => \@EXPORT_OK, default => \@EXPORT);
 }
 
+sub _croak
+{
+	require Carp;
+	goto \&Carp::croak;
+}
+
 unless (($ENV{PERLX_MAYBE_IMPLEMENTATION}||'') =~ /pp/i)
 {
 	eval q{ use PerlX::Maybe::XS 0.003 ':all' };
@@ -71,17 +77,17 @@ sub _provided_magic ($$$@)
 	{
 		my $r = shift;
 		my $t = ref $r;
-		die "Not a reference, $r" unless $t;
+		_croak "Not a reference, $r" unless $t;
 		
 		if ( $t eq 'ARRAY'   ) { return ( @$r, @_ ) };
 		if ( $t eq 'SCALAR'  ) { return ( $$r, @_ ) };  # not documented
 		if ( $t eq 'CODE'    ) { return ( &$r, @_ ) };
 		
-		die "Can not dereference, $r ... yet"
+		_croak "Can not dereference, $r ... yet"
 			if grep { $t eq $_ } qw (REF GLOB LVALUE FORMAT IO VSTRING Regexp);
 		
 		my @k = eval { keys %$r };
-		die "Can not unwrap $r into a hash" if $@;
+		_croak "Can not unwrap $r into a hash" if $@;
 		
 		return ( %$r, @_ ) unless $m; 
 		return (
