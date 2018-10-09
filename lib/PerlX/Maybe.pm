@@ -70,17 +70,17 @@ sub _provided_magic ($$$@)
 		my $r = shift;
 		my $t = ref $r;
 		die "Not a reference, $r" unless $t;
-
+		
 		if ( $t eq 'ARRAY'   ) { return ( @$r, @_ ) };
 		if ( $t eq 'SCALAR'  ) { return ( $$r, @_ ) };
 		if ( $t eq 'CODE'    ) { return ( &$r, @_ ) };
-
+		
 		die "Can not dereference, $r ... yet"
 			if grep { $t eq $_ } qw (REF GLOB LVALUE FORMAT IO VSTRING Regexp);
-
+		
 		my @k = eval { keys %$r };
 		die "Can not unwrap $r into a hash" if $@;
-
+		
 		return ( %$r, @_ ) unless $m; 
 		return (
 			( map { maybe $_ => $r->{ $_ } } grep { /^(?!_).*/ } @k ),
@@ -92,11 +92,6 @@ sub _provided_magic ($$$@)
 		(scalar @_ > 0) ? @_[1 .. $#_] : qw()
 	}
 }
-
-
-
-
-
 
 END_PP
 

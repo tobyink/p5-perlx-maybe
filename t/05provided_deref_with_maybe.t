@@ -59,17 +59,15 @@ is_deeply(
 		"quux",         4,
 		"foo", "bar",   5,
 		                6, # skip private
- 		                7, # skip undefined
+		                7, # skip undefined
 	],
 	"does do DWIM dereferencing"
 );
 
 package PerlX::Maybe::Test::Hash;
 
-    sub new {
-        my $class = shift;
-        my %data = @_;
-        my $obj = bless \%data, $class;
-        return $obj;
-        
-    }
+sub new {
+	my $class = shift;
+	my %data = @_;
+	bless \%data, $class;
+}

@@ -66,10 +66,8 @@ is_deeply(
 
 package PerlX::Maybe::Test::Hash;
 
-    sub new {
-        my $class = shift;
-        my %data = @_;
-        my $obj = bless \%data, $class;
-        return $obj;
-        
-    }
+sub new {
+	my $class = shift;
+	my %data = @_;
+	bless \%data, $class;
+}
