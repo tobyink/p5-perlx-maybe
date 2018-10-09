@@ -271,9 +271,11 @@ L<MooseX::UndefTolerant>, L<PerlX::Perform>, L<Exporter>.
 
 Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
 
+C<provided_deref> and C<provided_deref_with_maybe> by Theo van Hoesel.
+
 =head1 COPYRIGHT AND LICENCE
 
-This software is copyright (c) 2012-2013 by Toby Inkster.
+This software is copyright (c) 2012-2013, 2018 by Toby Inkster.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
