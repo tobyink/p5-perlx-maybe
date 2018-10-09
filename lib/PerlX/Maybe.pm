@@ -85,7 +85,7 @@ sub _provided_magic ($$$@)
 		
 		return ( %$r, @_ ) unless $m; 
 		return (
-			( map { maybe $_ => $r->{ $_ } } grep { /^(?!_).*/ } @k ),
+			( map defined($_)&&defined($r->{$_})?($_=>$r->{$_}):(), grep /^(?!_).*/, @k ),
 			@_
 		)
 	}
