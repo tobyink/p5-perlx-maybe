@@ -74,7 +74,7 @@ sub _provided_magic ($$$@)
 		die "Not a reference, $r" unless $t;
 		
 		if ( $t eq 'ARRAY'   ) { return ( @$r, @_ ) };
-		if ( $t eq 'SCALAR'  ) { return ( $$r, @_ ) };
+		if ( $t eq 'SCALAR'  ) { return ( $$r, @_ ) };  # not documented
 		if ( $t eq 'CODE'    ) { return ( &$r, @_ ) };
 		
 		die "Can not dereference, $r ... yet"
