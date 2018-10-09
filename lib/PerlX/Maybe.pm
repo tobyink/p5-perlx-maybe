@@ -81,9 +81,9 @@ sub _provided_magic ($$$@)
 		my $t = ref $r;
 		_croak "Not a reference, $r" unless $t;
 		
-		if ( $t eq 'ARRAY'   ) { return ( @$r, @_ ) };
-		if ( $t eq 'SCALAR'  ) { return ( $$r, @_ ) };  # not documented
-		if ( $t eq 'CODE'    ) { return ( &$r, @_ ) };
+		if ( $t eq 'ARRAY'   ) { return ( @$r,    @_ ) };
+		if ( $t eq 'SCALAR'  ) { return ( $$r,    @_ ) };  # not documented
+		if ( $t eq 'CODE'    ) { return ( $r->(), @_ ) };
 		
 		_croak "Can not dereference, $r ... yet"
 			if grep { $t eq $_ } qw (REF GLOB LVALUE FORMAT IO VSTRING Regexp);
