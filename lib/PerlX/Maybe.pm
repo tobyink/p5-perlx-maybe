@@ -52,6 +52,8 @@ sub provided ($$$@)
 	}
 }
 
+END_PP
+
 sub provided_deref ($$@)
 {
 	return _provided_magic(0, @_)
@@ -92,8 +94,6 @@ sub _provided_magic ($$$@)
 		(scalar @_ > 0) ? @_[1 .. $#_] : qw()
 	}
 }
-
-END_PP
 
 __FILE__
 __END__
