@@ -62,12 +62,14 @@ END_PP
 
 sub provided_deref ($$@)
 {
-	return _provided_magic(0, @_)
+	unshift @_, 0;
+	goto \&_provided_magic;
 }
 
 sub provided_deref_with_maybe ($$@)
 {
-	return _provided_magic(1, @_)
+	unshift @_, 1;
+	goto \&_provided_magic;
 }
 
 sub _provided_magic ($$$@)
