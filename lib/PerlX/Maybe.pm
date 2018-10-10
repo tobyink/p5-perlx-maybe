@@ -8,11 +8,39 @@ BEGIN {
 	our $AUTHORITY = 'cpan:TOBYINK';
 	our $VERSION   = '1.001';
 	
-	require Exporter;
-	our @ISA         = qw/ Exporter /;
 	our @EXPORT      = qw/ maybe /;
 	our @EXPORT_OK   = qw/ maybe provided provided_deref provided_deref_with_maybe/;
 	our %EXPORT_TAGS = (all => \@EXPORT_OK, default => \@EXPORT);
+}
+
+sub import
+{
+	if (@_ == 1)
+	{
+		my $caller = caller;
+		no strict 'refs';
+		*{"$caller\::maybe"} = \&maybe;
+		return;
+	}
+	elsif (grep ref||/^-/, @_)
+	{
+		require Exporter::Tiny;
+		our @ISA = qw/ Exporter::Tiny /;
+		*import = \&Exporter::Tiny::import;
+		*unimport = \&Exporter::Tiny::unimport;
+		goto \&Exporter::Tiny::import;
+	}
+	require Exporter;
+	goto \&Exporter::import;
+}
+
+sub unimport
+{
+	require Exporter::Tiny;
+	our @ISA = qw/ Exporter::Tiny /;
+	*import = \&Exporter::Tiny::import;
+	*unimport = \&Exporter::Tiny::unimport;
+	goto \&Exporter::Tiny::unimport;
 }
 
 sub _croak
