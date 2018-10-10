@@ -26,6 +26,7 @@ sub import
 	{
 		require Exporter::Tiny;
 		our @ISA = qw/ Exporter::Tiny /;
+		no warnings 'redefine';
 		*import = \&Exporter::Tiny::import;
 		*unimport = \&Exporter::Tiny::unimport;
 		goto \&Exporter::Tiny::import;
@@ -38,6 +39,7 @@ sub unimport
 {
 	require Exporter::Tiny;
 	our @ISA = qw/ Exporter::Tiny /;
+	no warnings 'redefine';
 	*import = \&Exporter::Tiny::import;
 	*unimport = \&Exporter::Tiny::unimport;
 	goto \&Exporter::Tiny::unimport;
