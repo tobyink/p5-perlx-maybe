@@ -6,6 +6,7 @@
 	:runtime-requirement    [ :on "Scalar::Util"^^:CpanId ];
 	:test-requirement       [ :on "Test::More 0.61"^^:CpanId ];
 	:runtime-recommendation [ :on "PerlX::Maybe::XS"^^:CpanId ];
+	:runtime-recommendation [ :on "Exporter::Tiny"^^:CpanId ];
 	:develop-recommendation [ :on "Dist::Inkt"^^:CpanId ];
 	:runtime-requirement    [ :on "perl 5.006"^^:CpanId ].
 
