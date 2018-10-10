@@ -58,8 +58,8 @@ is_deeply(
 		"baz", "qux",   3,
 		"blah", "quux", 4,
 		"foo", "bar",   5,
-		                6, # skip private
-		                7, # skip undefined
+		6, # skip private
+		7, # skip undefined
 	],
 	"does do DWIM dereferencing"
 );
