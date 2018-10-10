@@ -288,6 +288,8 @@ reference, which will be called in list context. If it is a blessed object,
 it will be treated as if it were a HASH reference (internally it could be
 another type of reference with overloading).
 
+This function is not exported by default.
+
 =item C<< provided_deref_with_maybe $condition, $r, @rest >>
 
 Like C<provide_deref> but will perform C<maybe> on each key-value pair in
@@ -307,6 +309,8 @@ Also, if the second argument is a blessed object, it will also skip any
 
 It not only "just works", it "DWIM"s!
 
+This function is not exported by default.
+
 =item C<< PerlX::Maybe::IMPLEMENTATION >>
 
 Indicates whether the XS backend L<PerlX::Maybe::XS> was loaded.
@@ -319,10 +323,28 @@ If you install L<PerlX::Maybe::XS>, a faster XS-based implementation will
 be used instead of the pure Perl functions. My basic benchmarking experiments
 seem to show this to be around 30% faster.
 
+Currently there are no XS implementations of the C<provided_deref> and
+C<provided_deref_with_maybe> functions. Contributions welcome.
+
 =head2 Environment
 
 The environment variable C<PERLX_MAYBE_IMPLEMENTATION> may be set to
 C<< "PP" >> to prevent the XS backend from loading.
+
+=head2 Exporting
+
+Only C<maybe> is exported by default. You can request other functions
+by name:
+
+  use PerlX::Maybe "maybe", "provided";
+
+Or to export everything:
+
+  use PerlX::Maybe ":all";
+
+If L<Exporter::Tiny> is installed, you can rename imports:
+
+  use PerlX::Maybe "maybe" => { -as => "perhaps" };
 
 =head1 BUGS
 
