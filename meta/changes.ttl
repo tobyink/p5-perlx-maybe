@@ -110,3 +110,35 @@ dist:v_1-001
 			rdfs:label "use warnings."@en;
 		];
 	].
+
+dist:project :release dist:v_1-200 .
+dist:v_1-200
+	a               :Version ;
+	dc:issued       "2018-10-10"^^xsd:date ;
+	:revision       "1.200"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-1.200.tar.gz> ;
+	rdfs:label      "Big new features time!"@en;
+	dcs:changeset [
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Package using newer version of Dist::Inkt."@en;
+		];
+		dcs:item [
+			a dcs:Packaging;
+			rdfs:label "Require Scalar::Util."@en;
+		];
+		dcs:item [
+			a dcs:Addition;
+			rdfs:label "Add `provided_deref` and `provided_deref_with_maybe` functions."@en;
+			dcs:thanks [ foaf:name "Theo van Hoesel"; foaf:nick "VANHOESEL" ];
+		];
+		dcs:item [
+			a dcs:Documentaion;
+			rdfs:label "Add `use` line to SYNOPSIS."@en;
+			dcs:thanks [ foaf:name "Ivan Baidakou"; foaf:nick "DMOL" ];
+		];
+		dcs:item [
+			a dcs:Change;
+			rdfs:label "Progressively load exporters, choosing Exporter.pm or Exporter::Tiny as needed."@en;
+		];
+	].

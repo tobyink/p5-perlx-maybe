@@ -6,7 +6,7 @@ package PerlX::Maybe;
 
 BEGIN {
 	our $AUTHORITY = 'cpan:TOBYINK';
-	our $VERSION   = '1.001';
+	our $VERSION   = '1.200';
 	
 	our @EXPORT      = qw/ maybe /;
 	our @EXPORT_OK   = qw/ maybe provided provided_deref provided_deref_with_maybe/;
