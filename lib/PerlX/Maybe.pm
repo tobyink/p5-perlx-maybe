@@ -75,27 +75,53 @@ sub provided_deref_with_maybe ($$@)
 sub _provided_magic ($$$@)
 {
 	my $m = shift; # maybe, clean up private keys
+	
 	if (shift)
 	{
 		my $r = shift;
 		my $t = ref $r;
 		_croak "Not a reference, $r" unless $t;
 		
-		if ( $t eq 'ARRAY'   ) { return ( @$r,    @_ ) };
-		if ( $t eq 'SCALAR'  ) { return ( $$r,    @_ ) };  # not documented
-		if ( $t eq 'CODE'    ) { return ( $r->(), @_ ) };
+		my @vals;
+		if ($t eq 'ARRAY')
+		{
+			return (@$r, @_) unless $m;
+			@vals = @$r;
+		}
 		
-		_croak "Can not dereference, $r ... yet"
-			if grep { $t eq $_ } qw (REF GLOB LVALUE FORMAT IO VSTRING Regexp);
+		elsif ($t eq 'CODE')
+		{
+			return ($r->(), @_) unless $m;
+			@vals = $r->();
+		}
+
+		elsif ($t eq 'HASH')
+		{
+			return (%$r, @_) unless $m;
+			@vals = %$r;
+		}
 		
-		my @k = eval { keys %$r };
-		_croak "Can not unwrap $r into a hash" if $@;
+		elsif (do { require Scalar::Util; Scalar::Util::blessed($r) })
+		{
+			my %vals = eval { %$r };
+			_croak "Can not unwrap $r into a hash" if $@;
+			return (%vals, @_) unless $m;
+			
+			delete $vals{$_} for grep /^_/, keys %vals;
+			@vals = %vals;
+		}
+
+		else
+		{
+			_croak "Can not dereference, $r ... yet";
+		}
 		
-		return ( %$r, @_ ) unless $m; 
-		return (
-			( map defined($_)&&defined($r->{$_})?($_=>$r->{$_}):(), grep /^(?!_).*/, @k ),
-			@_
-		)
+		my @return;
+		for (my $i = 0; $i < @vals; $i+=2) {
+			push @return, $vals[$i], $vals[$i+1] if defined $vals[$i] && defined $vals[$i+1];
+		}
+		
+		return (@return, @_);
 	}
 	else
 	{
@@ -213,7 +239,7 @@ This function is not exported by default.
 
 =item C<< provided_deref $condition, $r, @rest >>
 
-Like C<provided> but dereferences the 2nd argument into list-context:
+Like C<provided> but dereferences the second argument into list context:
 
  my $bob = Person->new(
                              name        => $name,
@@ -227,14 +253,15 @@ Like C<provided> but dereferences the 2nd argument into list-context:
                              unique_id   => $id,
  );
 
-The second argument may also be a CODEREF. in such case, it will use the return
-value of that paticular reference.
+The second argument may be a HASH or ARRAY reference. It may also be a CODE
+reference, which will be called in list context. If it is a blessed object,
+it will be treated as if it were a HASH reference (internally it could be
+another type of reference with overloading).
 
 =item C<< provided_deref_with_maybe $condition, $r, @rest >>
 
-Like C<provide_deref> but when the 2nd argument is a HASH ref, it will wrap the
-key/value pairs inside a C<maybe>, and as such will not put C<< $k => undef >>
-onto the list.
+Like C<provide_deref> but will perform C<maybe> on each key-value pair in
+the dereferenced values.
 
  my $bob = Person->new(
                              name        => $name,
@@ -245,9 +272,8 @@ onto the list.
                              unique_id   => $id,
  );
 
-But also, if the 2nd argument is an object - more specifically, a blessed
-HASHref - it will also skip any 'private' attributes (keys starting witn an C<_>
-(underscore).
+Also, if the second argument is a blessed object, it will also skip any
+'private' attributes (keys starting with an underscore).
 
 It not only "just works", it "DWIM"s!
 

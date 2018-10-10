@@ -47,7 +47,7 @@ is_deeply(
 ##		provided_deref 1,     \"scalar value",  1,
 		provided_deref 1,     ["foo", "bar"],   2,
 		provided_deref 1,     {"baz", "qux"},   3,
-		provided_deref 1,     sub { die("nope") if @_; return "quux" }, 4,
+		provided_deref 1,     sub { die("nope") if @_; return blah => "quux" }, 4,
 		provided_deref 1,     PerlX::Maybe::Test::Hash->new(  foo => 'bar' ), 5,
 		provided_deref 1,     PerlX::Maybe::Test::Hash->new( _baz => 'qux' ), 6,
 		provided_deref 1,     PerlX::Maybe::Test::Hash->new(  fuz => undef ), 7
@@ -56,7 +56,7 @@ is_deeply(
 ##		"scalar value", 1,
 		"foo", "bar",   2,
 		"baz", "qux",   3,
-		"quux",         4,
+		"blah", "quux", 4,
 		"foo", "bar",   5,
 		"_baz", "qux",  6,
 		"fuz", undef,   7,
