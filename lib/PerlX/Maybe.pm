@@ -128,7 +128,7 @@ You once wrote:
 Now you can write:
 
  use PerlX::Maybe;
-
+ 
  my $bob = Person->new(
     maybe name => $name,
     maybe age  => $age,

@@ -44,7 +44,7 @@ is_deeply(
 
 is_deeply(
 	[
-		provided_deref_with_maybe 1,     \"scalar value",  1,
+##		provided_deref_with_maybe 1,     \"scalar value",  1,
 		provided_deref_with_maybe 1,     ["foo", "bar"],   2,
 		provided_deref_with_maybe 1,     {"baz", "qux"},   3,
 		provided_deref_with_maybe 1,     sub { die("nope") if @_; return "quux" }, 4,
@@ -53,7 +53,7 @@ is_deeply(
 		provided_deref_with_maybe 1,     PerlX::Maybe::Test::Hash->new(  fuz => undef ), 7
 	],
 	[
-		"scalar value", 1,
+##		"scalar value", 1,
 		"foo", "bar",   2,
 		"baz", "qux",   3,
 		"quux",         4,
