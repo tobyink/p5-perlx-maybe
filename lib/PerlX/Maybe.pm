@@ -276,7 +276,7 @@ Like C<provided> but dereferences the second argument into list context:
                              address     => $addr,
    provided length($tel),    phone       => $tel,
    provided $email =~ /\@/,  email       => $email,
-   provided_deref $employee, {
+   provided_deref $employee, sub {
                              employee_id => $employee->employee_id,
                        maybe department  => $employee->department,
                            },
@@ -286,7 +286,9 @@ Like C<provided> but dereferences the second argument into list context:
 The second argument may be a HASH or ARRAY reference. It may also be a CODE
 reference, which will be called in list context. If it is a blessed object,
 it will be treated as if it were a HASH reference (internally it could be
-another type of reference with overloading).
+another type of reference with overloading). A code reference can be used
+if evaluation of the second argument should only occur if the condition is met
+(e.g. to prevent method calls on an uninitialised value).
 
 This function is not exported by default.
 
