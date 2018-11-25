@@ -142,3 +142,17 @@ dist:v_1-200
 			rdfs:label "Progressively load exporters, choosing Exporter.pm or Exporter::Tiny as needed."@en;
 		];
 	].
+
+dist:project :release dist:v_1-201 .
+dist:v_1-201
+	a               :Version ;
+	dc:issued       "2018-11-25"^^xsd:date ;
+	:revision       "1.201"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-1.201.tar.gz> ;
+	dcs:changeset [
+		dcs:item [
+			a dcs:Documentaion;
+			rdfs:label "Improve documentation for `provided_deref`."@en;
+			dcs:thanks [ foaf:name "Michael Jemmeson"; foaf:nick "MJEMMESON" ];
+		];
+	].
