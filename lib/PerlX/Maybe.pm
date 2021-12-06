@@ -219,8 +219,6 @@ at all when they are undefined, ugly looking code like this is often used:
 
 or:
 
- use PerlX::Maybe;
-
  my $bob = Person->new(
     (name => $name) x!!(defined $name),
     (age  => $age)  x!!(defined $age),
