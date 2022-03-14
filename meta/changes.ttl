@@ -156,3 +156,18 @@ dist:v_1-201
 			dcs:thanks [ foaf:name "Michael Jemmeson"; foaf:nick "MJEMMESON" ];
 		];
 	].
+
+dist:project :release dist:v_1-202 .
+dist:v_1-202
+	a               :Version ;
+	rdfs:label      "Pi Day" ;
+	dc:issued       "2022-03-14"^^xsd:date ;
+	:revision       "1.202"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Maybe-1.202.tar.gz> ;
+	dcs:changeset [
+		dcs:item [
+			a dcs:Documentaion;
+			rdfs:label "Fix code example."@en;
+			dcs:thanks [ foaf:name "Daniel Böhmer"; foaf:homepage <https://www.daniel-boehmer.de/> ];
+		];
+	].
